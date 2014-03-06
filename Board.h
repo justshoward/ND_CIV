@@ -26,7 +26,7 @@ class Board:
 	private:
 		//2D vector to store various units, i.e. buildings, students, etc.
 		//to be displayed to the screen
-		vector<vector <Unit> >
+		vector<vector <Unit> >;
 
 
 
