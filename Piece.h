@@ -20,6 +20,8 @@ class Piece
 		//Default constructor to be used in the map
 		//constructor
 		Piece(std::string);
+		
+		Piece();		
 
 		//Accessor for the image of the piece
 		SDL_Surface* getSurface();

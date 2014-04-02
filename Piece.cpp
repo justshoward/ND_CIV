@@ -11,11 +11,17 @@
 #include "Piece.h"
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
+#include <iostream>
 
 Piece::Piece(std::string filename)
 {
 	pType=NULL;
 	pType=load_image(filename);
+}
+
+Piece::Piece()
+{
+	pType=NULL;
 }
 
 SDL_Surface* Piece::getSurface()
@@ -45,11 +51,18 @@ SDL_Surface* Piece::load_image(std::string filename)
 		//if SDL_DisplayFormat worked, color key the surface.
 		if(optimized_image!=NULL)
 		{
-			//SDL_SetColorKey( optimized_image, SDL_SRCCOLORKEY, SDL_MapRGB( optimized_image->format, 0, 0xFF, 0xFF ) );
+			SDL_SetColorKey( optimized_image, SDL_SRCCOLORKEY, SDL_MapRGB( optimized_image->format, 0, 0xFF, 0xFF ) );
 		}
 			
 	}
-	
+	else
+	{
+		std::cout<<"Couldn't load image\n";
+	}		
+	if(optimized_image==NULL)
+	{
+		std::cout<<"Couldn't optimize image\n";
+	}
 	return optimized_image;
 }
 

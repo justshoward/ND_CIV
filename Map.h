@@ -10,6 +10,7 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include <string>
 #include <vector>
 #include "Piece.h"
 #include "Unit.h"
@@ -22,24 +23,24 @@ class Map
 
 	public:
 		//Constructor with inputs of Width and Height of Map
-		Map(int,int,int);
+		Map(string,int);
 		
-		//Create a map of just grass
-		void grassMap();
+		//Apply the pieces onto the screen
+		void applyMap(int,int);
 		
-		//Display the map (pieces only at this point) onto the
-		//screen
-		void displayMap();
+		//Flips the screen to the window
+		void flipMap();
 
 		//Free surfaces
 		void clean_up();
+
 
 	private:
 		////////////////////////////////////////
 		//VARIABLES
 		//////////////////////////////////////
 		//Store the dimensions of the Map,immuatable
-		const int mapHeight, mapWidth, pixelsper;
+		int mapHeight, mapWidth, pixelsper;
 
 		//2D vector to store various static units, i.e. buildings, grass, etc.
 		//to be displayed to the screen. 
@@ -48,6 +49,12 @@ class Map
 		//1D vector/list to store dynamic units, mainly the student class. Each unit will have position as
 		//private variable
 		vector<Unit*>  mapUnit;
+
+		//Piece's for the tile map to avoid a nasty copy constructor
+		Piece grass;
+		Piece water;
+		Piece dirt;
+		Piece road;		
 
 		//Screen to be used for displaying
 		SDL_Surface * screen;
@@ -64,6 +71,15 @@ class Map
 
 		//Initialize all of the SDL_Environment
 		int initialize();
+
+		//Load file for the map
+		void load_text(string);
+
+		//Get dimensions of the map from the text file
+		//Need to intialize screen, which is needed for 
+		//loading images
+		void get_dimensions(string,int&,int&);
+	
 };
 
 
